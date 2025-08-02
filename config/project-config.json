@@ -184,6 +184,26 @@
       "maxRetriesPerRequest": 3
     }
   },
+  "features": {
+    "authentication": true,
+    "aiIntegration": true,
+    "pomodoroTimer": true,
+    "analytics": true,
+    "adhdSupport": {
+      "enabled": true,
+      "visualTaskManager": true,
+      "flexiblePomodoro": true,
+      "energyTracking": true,
+      "distractionBlocking": true,
+      "rewardSystem": true,
+      "progressVisualization": true,
+      "adaptiveNotifications": true,
+      "focusMode": true,
+      "breakReminders": true,
+      "taskBreaking": true,
+      "motivationSystem": true
+    }
+  },
   "openai": {
     "apiKey": "your-openai-api-key",
     "organization": "your-org-id",

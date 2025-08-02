@@ -83,6 +83,8 @@ npm run dev
 - [Arquitetura do Sistema](./architecture/system-architecture.md)
 - [API Documentation](./docs/api-documentation.md)
 - [Guia de Desenvolvimento](./docs/development-guide.md)
+- [Otimização do Cursor](./docs/cursor-optimization-guide.md)
+- [Produtividade para TDAH](./docs/adhd-productivity-guide.md)
 
 ## 🤝 Contribuição
 

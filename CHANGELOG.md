@@ -8,6 +8,34 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### Added
+- 🧠 **Guia de Produtividade para TDAH**
+  - Técnicas específicas para pessoas com TDAH
+  - Estratégias de foco e concentração
+  - Métodos de organização adaptados
+  - Ferramentas e apps recomendados
+  - Adaptações para desenvolvimento de software
+  - Sistema de recompensas e gamificação
+
+- 🎯 **Recursos Específicos para TDAH**
+  - Timer Pomodoro adaptado (15-20 min)
+  - Sistema de quebra de tarefas
+  - Modo hiperfoco com bloqueio de distrações
+  - Rastreamento de energia e produtividade
+  - Notificações adaptativas
+  - Interface visual otimizada
+
+- 📚 **Documentação Atualizada**
+  - Guia de otimização do Cursor
+  - Prompts estruturados para IA
+  - Configurações específicas para TDAH
+  - Estratégias de desenvolvimento inclusivo
+
+### Changed
+- Atualizada configuração do projeto para incluir recursos de TDAH
+- Melhorada documentação com foco em acessibilidade
+- Expandido README com referências ao guia de TDAH
+
+### Added (Previous)
 - Estrutura inicial do boilerplate
 - Documentação completa do projeto
 - Requisitos funcionais e técnicos
