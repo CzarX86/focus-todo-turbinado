@@ -1,0 +1,375 @@
+{
+  "project": {
+    "name": "Focus Todo Turbinado",
+    "version": "1.0.0",
+    "description": "Aplicativo de gerenciamento de tarefas inteligente com integração ChatGPT",
+    "author": "Seu Nome",
+    "license": "MIT",
+    "repository": "https://github.com/seu-usuario/focus-todo-turbinado"
+  },
+  "architecture": {
+    "frontend": {
+      "framework": "React",
+      "language": "TypeScript",
+      "version": "18.2.0",
+      "styling": "Tailwind CSS",
+      "stateManagement": "Zustand",
+      "routing": "React Router",
+      "httpClient": "Axios",
+      "ui": "Headless UI",
+      "icons": "Heroicons",
+      "forms": "React Hook Form",
+      "validation": "Zod",
+      "animations": "Framer Motion"
+    },
+    "backend": {
+      "runtime": "Node.js",
+      "language": "TypeScript",
+      "version": "18.17.0",
+      "framework": "Express.js",
+      "version": "4.18.2",
+      "orm": "Prisma",
+      "version": "5.0.0",
+      "authentication": "JWT + bcrypt",
+      "websockets": "Socket.io",
+      "queue": "Bull + Redis",
+      "logging": "Winston",
+      "validation": "Zod"
+    },
+    "database": {
+      "primary": "PostgreSQL",
+      "version": "14.0",
+      "cache": "Redis",
+      "version": "7.0",
+      "migration": "Prisma Migrate",
+      "seeding": "Prisma Seed"
+    },
+    "ai": {
+      "provider": "OpenAI",
+      "model": "gpt-4",
+      "fallback": "gpt-3.5-turbo",
+      "maxTokens": 1000,
+      "temperature": 0.7
+    }
+  },
+  "development": {
+    "nodeVersion": "18.17.0",
+    "packageManager": "npm",
+    "scripts": {
+      "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+      "dev:frontend": "cd frontend && npm run dev",
+      "dev:backend": "cd backend && npm run dev",
+      "build": "npm run build:frontend && npm run build:backend",
+      "build:frontend": "cd frontend && npm run build",
+      "build:backend": "cd backend && npm run build",
+      "test": "npm run test:unit && npm run test:integration && npm run test:e2e",
+      "test:unit": "jest",
+      "test:integration": "jest --config jest.integration.config.js",
+      "test:e2e": "playwright test",
+      "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+      "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+      "format": "prettier --write .",
+      "type-check": "tsc --noEmit"
+    },
+    "tools": {
+      "eslint": "^8.45.0",
+      "prettier": "^3.0.0",
+      "typescript": "^5.1.6",
+      "jest": "^29.6.2",
+      "playwright": "^1.36.0",
+      "puppeteer": "^21.0.0"
+    }
+  },
+  "testing": {
+    "unit": {
+      "framework": "Jest",
+      "coverage": {
+        "statements": 80,
+        "branches": 80,
+        "functions": 80,
+        "lines": 80
+      },
+      "setupFiles": ["<rootDir>/tests/setup.ts"],
+      "testEnvironment": "jsdom"
+    },
+    "integration": {
+      "framework": "Jest + Supertest",
+      "database": "test_db",
+      "cleanup": "afterEach",
+      "fixtures": "./tests/fixtures"
+    },
+    "e2e": {
+      "framework": "Playwright",
+      "browsers": ["chromium", "firefox", "webkit"],
+      "trace": "on-first-retry",
+      "screenshot": "only-on-failure",
+      "video": "retain-on-failure"
+    },
+    "performance": {
+      "framework": "Artillery",
+      "scenarios": [
+        {
+          "name": "Task CRUD operations",
+          "weight": 70
+        },
+        {
+          "name": "AI Analysis",
+          "weight": 20
+        },
+        {
+          "name": "Pomodoro Sessions",
+          "weight": 10
+        }
+      ]
+    }
+  },
+  "security": {
+    "authentication": {
+      "jwt": {
+        "accessTokenExpiry": "15m",
+        "refreshTokenExpiry": "7d",
+        "algorithm": "HS256"
+      },
+      "password": {
+        "saltRounds": 12,
+        "minLength": 8,
+        "requireSpecialChars": true
+      }
+    },
+    "rateLimiting": {
+      "windowMs": 900000,
+      "max": 100,
+      "message": "Too many requests from this IP"
+    },
+    "cors": {
+      "origin": ["http://localhost:3000", "https://focus-todo-turbinado.vercel.app"],
+      "credentials": true
+    },
+    "helmet": {
+      "contentSecurityPolicy": {
+        "directives": {
+          "defaultSrc": ["'self'"],
+          "styleSrc": ["'self'", "'unsafe-inline'"],
+          "scriptSrc": ["'self'"],
+          "imgSrc": ["'self'", "data:", "https:"]
+        }
+      }
+    }
+  },
+  "database": {
+    "postgresql": {
+      "host": "localhost",
+      "port": 5432,
+      "database": "focus_todo",
+      "username": "postgres",
+      "password": "password",
+      "ssl": false,
+      "pool": {
+        "min": 5,
+        "max": 20,
+        "acquireTimeoutMillis": 30000,
+        "createTimeoutMillis": 30000,
+        "destroyTimeoutMillis": 5000,
+        "idleTimeoutMillis": 30000,
+        "reapIntervalMillis": 1000,
+        "createRetryIntervalMillis": 100
+      }
+    },
+    "redis": {
+      "host": "localhost",
+      "port": 6379,
+      "password": null,
+      "db": 0,
+      "retryDelayOnFailover": 100,
+      "maxRetriesPerRequest": 3
+    }
+  },
+  "openai": {
+    "apiKey": "your-openai-api-key",
+    "organization": "your-org-id",
+    "models": {
+      "primary": "gpt-4",
+      "fallback": "gpt-3.5-turbo",
+      "analysis": "gpt-4",
+      "conversation": "gpt-3.5-turbo"
+    },
+    "configurations": {
+      "taskAnalysis": {
+        "model": "gpt-4",
+        "temperature": 0.3,
+        "maxTokens": 1000,
+        "topP": 0.9,
+        "frequencyPenalty": 0.1,
+        "presencePenalty": 0.1
+      },
+      "productivityAnalysis": {
+        "model": "gpt-4",
+        "temperature": 0.5,
+        "maxTokens": 1500,
+        "topP": 0.9,
+        "frequencyPenalty": 0.2,
+        "presencePenalty": 0.1
+      },
+      "conversational": {
+        "model": "gpt-3.5-turbo",
+        "temperature": 0.7,
+        "maxTokens": 500,
+        "topP": 0.9,
+        "frequencyPenalty": 0.1,
+        "presencePenalty": 0.1
+      }
+    },
+    "rateLimiting": {
+      "requestsPerMinute": 60,
+      "tokensPerMinute": 150000
+    }
+  },
+  "features": {
+    "mvp": {
+      "authentication": true,
+      "taskManagement": true,
+      "aiIntegration": true,
+      "pomodoroTimer": true,
+      "responsiveUI": true
+    },
+    "phase2": {
+      "advancedAnalytics": false,
+      "teamCollaboration": false,
+      "mobileApp": false,
+      "integrations": false,
+      "advancedAI": false
+    },
+    "experimental": {
+      "voiceCommands": false,
+      "calendarIntegration": false,
+      "habitTracking": false,
+      "gamification": false
+    }
+  },
+  "deployment": {
+    "environments": {
+      "development": {
+        "frontend": "http://localhost:3000",
+        "backend": "http://localhost:4000",
+        "database": "localhost:5432",
+        "redis": "localhost:6379"
+      },
+      "staging": {
+        "frontend": "https://staging.focus-todo-turbinado.vercel.app",
+        "backend": "https://staging-api.focus-todo-turbinado.railway.app",
+        "database": "staging-postgresql.railway.app",
+        "redis": "staging-redis.railway.app"
+      },
+      "production": {
+        "frontend": "https://focus-todo-turbinado.vercel.app",
+        "backend": "https://api.focus-todo-turbinado.railway.app",
+        "database": "production-postgresql.railway.app",
+        "redis": "production-redis.railway.app"
+      }
+    },
+    "providers": {
+      "frontend": "Vercel",
+      "backend": "Railway",
+      "database": "Railway PostgreSQL",
+      "cache": "Railway Redis",
+      "monitoring": "Sentry + LogRocket"
+    },
+    "docker": {
+      "enabled": true,
+      "multiStage": true,
+      "optimization": true
+    }
+  },
+  "monitoring": {
+    "logging": {
+      "level": "info",
+      "format": "json",
+      "transports": ["console", "file"],
+      "files": {
+        "error": "logs/error.log",
+        "combined": "logs/combined.log"
+      }
+    },
+    "metrics": {
+      "enabled": true,
+      "collector": "prometheus",
+      "endpoint": "/metrics",
+      "interval": 15000
+    },
+    "healthChecks": {
+      "enabled": true,
+      "endpoint": "/health",
+      "checks": ["database", "redis", "openai"]
+    },
+    "errorTracking": {
+      "sentry": {
+        "enabled": true,
+        "dsn": "your-sentry-dsn"
+      }
+    },
+    "userAnalytics": {
+      "logrocket": {
+        "enabled": true,
+        "appId": "your-logrocket-app-id"
+      }
+    }
+  },
+  "performance": {
+    "caching": {
+      "redis": {
+        "enabled": true,
+        "ttl": 3600,
+        "prefix": "focus_todo:"
+      },
+      "browser": {
+        "enabled": true,
+        "maxAge": 86400
+      }
+    },
+    "optimization": {
+      "compression": true,
+      "minification": true,
+      "treeShaking": true,
+      "codeSplitting": true,
+      "lazyLoading": true
+    },
+    "limits": {
+      "maxFileSize": "10mb",
+      "maxRequestSize": "10mb",
+      "rateLimit": 100,
+      "timeout": 30000
+    }
+  },
+  "accessibility": {
+    "wcag": "2.1",
+    "level": "AA",
+    "features": {
+      "keyboardNavigation": true,
+      "screenReader": true,
+      "highContrast": true,
+      "fontScaling": true,
+      "focusIndicators": true
+    }
+  },
+  "internationalization": {
+    "enabled": false,
+    "defaultLocale": "pt-BR",
+    "supportedLocales": ["pt-BR", "en-US"],
+    "fallbackLocale": "pt-BR"
+  },
+  "documentation": {
+    "api": {
+      "swagger": true,
+      "endpoint": "/api-docs"
+    },
+    "code": {
+      "jsdoc": true,
+      "tsdoc": true
+    },
+    "user": {
+      "guides": true,
+      "tutorials": true,
+      "faq": true
+    }
+  }
+} 
