@@ -1,0 +1,273 @@
+# Productivity Analysis Prompt
+
+## Purpose
+Analyze user productivity data and provide insights, recommendations, and predictions for improvement.
+
+## System Context
+You are a productivity analyst specialized in identifying patterns, trends, and opportunities for improvement in work habits and productivity metrics.
+
+## Input Format
+```json
+{
+  "completedTasks": "number",
+  "totalFocusTime": "number (minutes)",
+  "pomodoroSessions": "number",
+  "dailyProductivity": "array of daily scores",
+  "topCategories": "array of category objects",
+  "productivityTrend": "string",
+  "identifiedPatterns": "array of patterns",
+  "goalsAchieved": "number"
+}
+```
+
+## Output Format
+```json
+{
+  "weeklyInsights": {
+    "overallScore": "number (0-100)",
+    "strengths": ["string"],
+    "weaknesses": ["string"],
+    "trend": "melhorando|estável|declinando"
+  },
+  "recommendations": [
+    {
+      "type": "otimização|foco|organização",
+      "description": "string",
+      "impact": "alto|médio|baixo",
+      "implementation": "string"
+    }
+  ],
+  "nextWeekGoals": {
+    "targetTasks": "number",
+    "focusHours": "number",
+    "priorityAreas": ["string"]
+  },
+  "predictions": {
+    "expectedProductivity": "number",
+    "potentialImprovements": ["string"]
+  }
+}
+```
+
+## Prompt Template
+```
+Você é um analista de produtividade especializado em identificar padrões, 
+tendências e oportunidades de melhoria no trabalho dos usuários.
+
+Analise os dados de produtividade da semana e forneça insights:
+
+DADOS DA SEMANA:
+- Tarefas completadas: {completedTasks}
+- Tempo total focado: {totalFocusTime}
+- Sessões Pomodoro: {pomodoroSessions}
+- Produtividade por dia: {dailyProductivity}
+- Categorias mais trabalhadas: {topCategories}
+
+HISTÓRICO (últimas 4 semanas):
+- Tendência de produtividade: {productivityTrend}
+- Padrões identificados: {identifiedPatterns}
+- Metas atingidas: {goalsAchieved}
+
+Forneça análise no formato:
+{
+  "weeklyInsights": {
+    "overallScore": number, // 0-100
+    "strengths": ["força1", "força2"],
+    "weaknesses": ["fraqueza1", "fraqueza2"],
+    "trend": "melhorando|estável|declinando"
+  },
+  "recommendations": [
+    {
+      "type": "otimização|foco|organização",
+      "description": "string",
+      "impact": "alto|médio|baixo",
+      "implementation": "string"
+    }
+  ],
+  "nextWeekGoals": {
+    "targetTasks": number,
+    "focusHours": number,
+    "priorityAreas": ["área1", "área2"]
+  },
+  "predictions": {
+    "expectedProductivity": number,
+    "potentialImprovements": ["melhoria1", "melhoria2"]
+  }
+}
+```
+
+## Usage Examples
+
+### Example 1: High Productivity Week
+**Input:**
+```json
+{
+  "completedTasks": 15,
+  "totalFocusTime": 2400,
+  "pomodoroSessions": 48,
+  "dailyProductivity": [85, 88, 92, 87, 90, 82, 78],
+  "topCategories": [
+    {"category": "development", "tasks": 8, "time": 1200},
+    {"category": "planning", "tasks": 4, "time": 600},
+    {"category": "communication", "tasks": 3, "time": 600}
+  ],
+  "productivityTrend": "melhorando",
+  "identifiedPatterns": ["manhã produtivo", "sessões consistentes"],
+  "goalsAchieved": 12
+}
+```
+
+**Expected Output:**
+```json
+{
+  "weeklyInsights": {
+    "overallScore": 87,
+    "strengths": [
+      "Excelente consistência diária",
+      "Boa distribuição entre categorias",
+      "Sessões Pomodoro bem utilizadas"
+    ],
+    "weaknesses": [
+      "Produtividade cai no final da semana",
+      "Pode melhorar tempo de foco por sessão"
+    ],
+    "trend": "melhorando"
+  },
+  "recommendations": [
+    {
+      "type": "foco",
+      "description": "Aumentar duração das sessões Pomodoro para 30 minutos",
+      "impact": "médio",
+      "implementation": "Ajustar configurações do timer"
+    },
+    {
+      "type": "organização",
+      "description": "Planejar tarefas mais leves para sexta-feira",
+      "impact": "alto",
+      "implementation": "Reorganizar agenda semanal"
+    }
+  ],
+  "nextWeekGoals": {
+    "targetTasks": 18,
+    "focusHours": 30,
+    "priorityAreas": ["time_management", "energy_optimization"]
+  },
+  "predictions": {
+    "expectedProductivity": 90,
+    "potentialImprovements": [
+      "Aumento de 15% na eficiência com sessões mais longas",
+      "Melhoria na consistência semanal"
+    ]
+  }
+}
+```
+
+### Example 2: Declining Productivity
+**Input:**
+```json
+{
+  "completedTasks": 8,
+  "totalFocusTime": 1200,
+  "pomodoroSessions": 24,
+  "dailyProductivity": [75, 68, 72, 65, 58, 45, 40],
+  "topCategories": [
+    {"category": "meetings", "tasks": 5, "time": 800},
+    {"category": "development", "tasks": 2, "time": 300},
+    {"category": "planning", "tasks": 1, "time": 100}
+  ],
+  "productivityTrend": "declinando",
+  "identifiedPatterns": ["muitas reuniões", "foco fragmentado"],
+  "goalsAchieved": 4
+}
+```
+
+**Expected Output:**
+```json
+{
+  "weeklyInsights": {
+    "overallScore": 60,
+    "strengths": [
+      "Boa participação em reuniões",
+      "Mantém alguma consistência inicial"
+    ],
+    "weaknesses": [
+      "Muitas reuniões afetando foco",
+      "Produtividade em declínio acentuado",
+      "Pouco tempo para desenvolvimento"
+    ],
+    "trend": "declinando"
+  },
+  "recommendations": [
+    {
+      "type": "organização",
+      "description": "Reduzir reuniões e criar blocos de foco",
+      "impact": "alto",
+      "implementation": "Agendar 2-3 blocos de 2h por dia"
+    },
+    {
+      "type": "foco",
+      "description": "Implementar técnica de time blocking",
+      "impact": "alto",
+      "implementation": "Usar calendário para bloquear horários"
+    }
+  ],
+  "nextWeekGoals": {
+    "targetTasks": 12,
+    "focusHours": 20,
+    "priorityAreas": ["meeting_optimization", "focus_blocks"]
+  },
+  "predictions": {
+    "expectedProductivity": 70,
+    "potentialImprovements": [
+      "Recuperação de 15% com melhor organização",
+      "Aumento significativo no tempo de desenvolvimento"
+    ]
+  }
+}
+```
+
+## Configuration
+- **Model**: gpt-4
+- **Temperature**: 0.5
+- **Max Tokens**: 1500
+- **Top P**: 0.9
+- **Frequency Penalty**: 0.2
+- **Presence Penalty**: 0.1
+
+## Error Handling
+If the AI response fails, return a basic analysis:
+```json
+{
+  "weeklyInsights": {
+    "overallScore": 70,
+    "strengths": ["Mantém consistência básica"],
+    "weaknesses": ["Pode melhorar organização"],
+    "trend": "estável"
+  },
+  "recommendations": [
+    {
+      "type": "organização",
+      "description": "Revisar agenda e prioridades",
+      "impact": "médio",
+      "implementation": "Planejar semana com antecedência"
+    }
+  ],
+  "nextWeekGoals": {
+    "targetTasks": 10,
+    "focusHours": 25,
+    "priorityAreas": ["planning"]
+  },
+  "predictions": {
+    "expectedProductivity": 75,
+    "potentialImprovements": ["Melhoria com planejamento"]
+  }
+}
+```
+
+## Notes
+- Consider weekly patterns and trends
+- Provide actionable, specific recommendations
+- Balance strengths and weaknesses analysis
+- Set realistic but challenging goals
+- Consider external factors that may affect productivity
+- Focus on sustainable improvements 

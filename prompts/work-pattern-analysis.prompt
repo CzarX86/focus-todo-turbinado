@@ -1,0 +1,266 @@
+# Work Pattern Analysis Prompt
+
+## Purpose
+Analyze user work patterns and provide optimization suggestions based on behavioral data and preferences.
+
+## System Context
+You are a behavioral analyst specialized in identifying work patterns and suggesting optimizations based on productivity data and user preferences.
+
+## Input Format
+```json
+{
+  "productiveHours": ["string (HH:MM)"],
+  "averageSessionDuration": "number (minutes)",
+  "breakPatterns": "array of break objects",
+  "preferredCategories": ["string"],
+  "commonChallenges": ["string"],
+  "workType": "string",
+  "workEnvironment": "string",
+  "personalPreferences": "object"
+}
+```
+
+## Output Format
+```json
+{
+  "patternInsights": {
+    "optimalWorkHours": ["string (HH:MM)"],
+    "recommendedSessionLength": "number (minutes)",
+    "breakStrategy": "string",
+    "productivityPeaks": ["string (HH:MM)"]
+  },
+  "optimizationSuggestions": [
+    {
+      "pattern": "string",
+      "suggestion": "string",
+      "expectedBenefit": "string"
+    }
+  ],
+  "scheduleRecommendations": {
+    "morningRoutine": ["string"],
+    "afternoonFocus": ["string"],
+    "eveningWrapup": ["string"]
+  }
+}
+```
+
+## Prompt Template
+```
+Você é um especialista em análise comportamental que identifica 
+padrões de trabalho e sugere otimizações baseadas em dados.
+
+Analise os padrões de trabalho do usuário:
+
+DADOS DE PADRÕES:
+- Horários mais produtivos: {productiveHours}
+- Duração média das sessões: {averageSessionDuration}
+- Intervalos entre sessões: {breakPatterns}
+- Categorias preferidas: {preferredCategories}
+- Dificuldades frequentes: {commonChallenges}
+
+CONTEXTO:
+- Tipo de trabalho: {workType}
+- Ambiente: {workEnvironment}
+- Preferências pessoais: {personalPreferences}
+
+Forneça análise de padrões:
+{
+  "patternInsights": {
+    "optimalWorkHours": ["hora1", "hora2"],
+    "recommendedSessionLength": number,
+    "breakStrategy": "string",
+    "productivityPeaks": ["pico1", "pico2"]
+  },
+  "optimizationSuggestions": [
+    {
+      "pattern": "string",
+      "suggestion": "string",
+      "expectedBenefit": "string"
+    }
+  ],
+  "scheduleRecommendations": {
+    "morningRoutine": ["atividade1", "atividade2"],
+    "afternoonFocus": ["atividade1", "atividade2"],
+    "eveningWrapup": ["atividade1", "atividade2"]
+  }
+}
+```
+
+## Usage Examples
+
+### Example 1: Morning Person Pattern
+**Input:**
+```json
+{
+  "productiveHours": ["08:00", "09:00", "10:00", "14:00", "15:00"],
+  "averageSessionDuration": 25,
+  "breakPatterns": [
+    {"duration": 5, "frequency": "every 25 minutes"},
+    {"duration": 15, "frequency": "every 4 sessions"}
+  ],
+  "preferredCategories": ["development", "planning", "analysis"],
+  "commonChallenges": ["afternoon slump", "meeting interruptions"],
+  "workType": "software_development",
+  "workEnvironment": "home_office",
+  "personalPreferences": {
+    "quietEnvironment": true,
+    "flexibleSchedule": true,
+    "deepWork": true
+  }
+}
+```
+
+**Expected Output:**
+```json
+{
+  "patternInsights": {
+    "optimalWorkHours": ["08:00", "09:00", "10:00", "14:00", "15:00"],
+    "recommendedSessionLength": 30,
+    "breakStrategy": "5min breaks every 30min, 15min break every 2 hours",
+    "productivityPeaks": ["09:00", "14:00"]
+  },
+  "optimizationSuggestions": [
+    {
+      "pattern": "morning productivity peak",
+      "suggestion": "Agendar tarefas complexas entre 8h-11h",
+      "expectedBenefit": "Aumento de 25% na eficiência de desenvolvimento"
+    },
+    {
+      "pattern": "afternoon slump",
+      "suggestion": "Implementar pausas mais longas e atividades leves",
+      "expectedBenefit": "Manutenção da produtividade no período crítico"
+    },
+    {
+      "pattern": "meeting interruptions",
+      "suggestion": "Bloquear horários de foco profundo",
+      "expectedBenefit": "Redução de 40% nas interrupções"
+    }
+  ],
+  "scheduleRecommendations": {
+    "morningRoutine": [
+      "Revisar tarefas prioritárias",
+      "Iniciar desenvolvimento complexo",
+      "Planejar sessões de foco"
+    ],
+    "afternoonFocus": [
+      "Continuar desenvolvimento",
+      "Reuniões e colaboração",
+      "Revisão de código"
+    ],
+    "eveningWrapup": [
+      "Finalizar tarefas pendentes",
+      "Planejar próximo dia",
+      "Documentação e organização"
+    ]
+  }
+}
+```
+
+### Example 2: Flexible Schedule Pattern
+**Input:**
+```json
+{
+  "productiveHours": ["10:00", "11:00", "15:00", "16:00", "20:00", "21:00"],
+  "averageSessionDuration": 45,
+  "breakPatterns": [
+    {"duration": 10, "frequency": "every 45 minutes"},
+    {"duration": 30, "frequency": "every 3 sessions"}
+  ],
+  "preferredCategories": ["creative", "research", "writing"],
+  "commonChallenges": ["procrastination", "distractions"],
+  "workType": "content_creation",
+  "workEnvironment": "flexible",
+  "personalPreferences": {
+    "creativeFreedom": true,
+    "variedSchedule": true,
+    "inspirationBased": true
+  }
+}
+```
+
+**Expected Output:**
+```json
+{
+  "patternInsights": {
+    "optimalWorkHours": ["10:00", "15:00", "20:00"],
+    "recommendedSessionLength": 45,
+    "breakStrategy": "10min breaks every 45min, 30min break every 2.5 hours",
+    "productivityPeaks": ["15:00", "20:00"]
+  },
+  "optimizationSuggestions": [
+    {
+      "pattern": "creative peaks",
+      "suggestion": "Alinhar sessões criativas com horários de pico",
+      "expectedBenefit": "Aumento de 35% na qualidade do conteúdo"
+    },
+    {
+      "pattern": "procrastination",
+      "suggestion": "Implementar técnica de time blocking criativo",
+      "expectedBenefit": "Redução de 50% na procrastinação"
+    },
+    {
+      "pattern": "distractions",
+      "suggestion": "Criar ambiente de foco com música ou ruído branco",
+      "expectedBenefit": "Melhoria de 30% na concentração"
+    }
+  ],
+  "scheduleRecommendations": {
+    "morningRoutine": [
+      "Pesquisa e inspiração",
+      "Planejar conteúdo do dia",
+      "Sessão criativa leve"
+    ],
+    "afternoonFocus": [
+      "Criação de conteúdo principal",
+      "Revisão e edição",
+      "Colaboração e feedback"
+    ],
+    "eveningWrapup": [
+      "Sessão criativa noturna",
+      "Finalizar projetos",
+      "Planejar inspirações"
+    ]
+  }
+}
+```
+
+## Configuration
+- **Model**: gpt-4
+- **Temperature**: 0.4
+- **Max Tokens**: 1200
+- **Top P**: 0.9
+- **Frequency Penalty**: 0.15
+- **Presence Penalty**: 0.1
+
+## Error Handling
+If the AI response fails, return a basic pattern analysis:
+```json
+{
+  "patternInsights": {
+    "optimalWorkHours": ["09:00", "14:00"],
+    "recommendedSessionLength": 25,
+    "breakStrategy": "5min breaks every 25min",
+    "productivityPeaks": ["10:00", "15:00"]
+  },
+  "optimizationSuggestions": [
+    {
+      "pattern": "basic productivity",
+      "suggestion": "Manter consistência nos horários de trabalho",
+      "expectedBenefit": "Estabilidade na produtividade"
+    }
+  ],
+  "scheduleRecommendations": {
+    "morningRoutine": ["Revisar tarefas", "Iniciar trabalho"],
+    "afternoonFocus": ["Trabalho principal", "Reuniões"],
+    "eveningWrapup": ["Finalizar tarefas", "Planejar próximo dia"]
+  }
+}
+```
+
+## Notes
+- Consider individual preferences and work style
+- Provide flexible but structured recommendations
+- Account for different work environments
+- Balance productivity with well-being
+- Consider circadian rhythms and energy levels
+- Adapt suggestions to work type and industry 
